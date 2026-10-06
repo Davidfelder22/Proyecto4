@@ -1,0 +1,19 @@
+{
+  "name": "proyecto4-login-obra-social",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Casos de Login con Gherkin, Cucumber, Playwright y Page Object Model",
+  "engines": { "node": "22 || 24 || >=26" },
+  "scripts": {
+    "test": "node scripts/run-cucumber.js",
+    "test:dry": "node scripts/run-cucumber.js --dry-run",
+    "test:pom": "node --test tests/*.test.js",
+    "test:headed": "node scripts/run-cucumber.js --headed",
+    "browsers:install": "playwright install chromium",
+    "trace": "playwright show-trace"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "13.2.1",
+    "@playwright/test": "1.63.0"
+  }
+}

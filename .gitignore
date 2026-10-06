@@ -1,0 +1,16 @@
+# Dependencias instaladas en cada equipo
+node_modules/
+
+# Resultados generados al ejecutar las pruebas
+reports/
+playwright-report/
+test-results/
+
+# Configuración local y variables de entorno
+.env
+.env.*
+!.env.example
+
+# Archivos generados por el sistema operativo
+.DS_Store
+Thumbs.db

@@ -1,0 +1,21 @@
+# Avance: docs/superpowers/plans/2026-10-03-login.md
+
+- Diseño aprobado en el chat. Se implementa aquí sin crear chats ni repositorios nuevos.
+- Inspección previa: 13 casos en hoja login, filas 3–15. LOG-05 llega a bienvenida.html. LOG-13 no muestra advertencia después de tres intentos fallidos.
+- Interfaces revisadas: los pasos reciben datos y llaman a Page Objects; el World comparte estado sólo entre pasos del mismo escenario.
+- Decisión: usar el proyecto original sin commits ni worktree porque no hay repositorio Git.
+- Tarea 1: completa. Primer dry-run: 13 escenarios y 51 pasos undefined. Gherkin reconocido antes de implementar.
+- Tarea 2: Page Objects, pasos, World y hooks implementados. Segundo dry-run: 13 escenarios, 77 pasos skipped, ninguno undefined. Chromium pendiente de instalación y ejecución real.
+- Dependencias verificadas en npm: Cucumber 13.2.1 y Playwright 1.63.0; versiones exactas y package-lock.json.
+- Ejecución restringida: 13 fallos de red ERR_NETWORK_ACCESS_DENIED. Reejecución autorizada con acceso a la red.
+- Primera ejecución real: 10 passed, 3 failed. LOG-08 y LOG-09 mostraron `El usuario no es correcto.`; el punto en la columna observada estaba fuera de comillas. Se precisa la comprobación textual, conservando el esperado general de acceso denegado. LOG-13 recibió advertencia vacía tras tres intentos, conforme al defecto conocido.
+- Evidencia: eliminar capturas y trazas antiguas del mismo caso cuando aprueba para evitar presentar evidencia obsoleta como un fallo vigente.
+- Tarea 2 completa: ejecución final `npm test`: 12 passed, 1 failed (LOG-13), 75 pasos passed, 1 failed, 1 skipped; hooks globales passed. No errores de implementación pendientes observados.
+- Tarea 3: README y resultados documentados; revisión de código independiente en curso.
+- Revisión: un hallazgo P2. El POM exigía un error visible incluso en el tercer intento, lo que rechazaría una corrección válida que mostrase sólo la advertencia. Prueba de regresión local con Chromium: RED, error oculto en el tercer intento. Corrección: esperar un mensaje visible de error o advertencia; la aserción final conserva el esperado exacto.
+- Fuera de alcance ratificado: navegadores adicionales, autenticación de servidor, permisos de servicios posteriores y recuperación de infraestructura; la consigna sólo pide Login.
+- Corrección revisada con prueba de regresión: GREEN, 1 passed en `npm run test:pom`. Suite real posterior: 12 passed, 1 failed (únicamente LOG-13), 75 pasos passed, 1 failed y 1 skipped. Reporte JSON final comprobado: 13 escenarios, sólo LOG-13 falla.
+- Comparación independiente con XML del Excel: los 13 IDs, correos y contraseñas coinciden con los datos recibidos en las evidencias. LOG-13 registra exactamente 3 intentos.
+- Tarea 3 completa. Documentación, evidencias y revisión terminadas. El defecto del sitio permanece expresado como prueba fallida.
+- Cambio solicitado por el usuario: 13 escenarios individuales con Given, When y Then explícitos y palabras clave en inglés. Se conserva DataTable como pasaje de datos a Cucumber y Playwright, el POM y todas las expectativas. Documentación actualizada. Dry-run: 13 escenarios reconocidos sin undefined. Ejecución real posterior: 12 passed y LOG-13 failed por la advertencia ausente. Reporte JSON verificado: cada uno de los 13 escenarios contiene Given, When y Then propios.
+- Diagnóstico de un LOG-13 aprobado reportado por el usuario: código del escenario y aserción conservan 3 intentos y el mensaje esperado. Reporte reciente mostraba fallo en Then y cierre de página durante After; evidencia anterior mostraba PASSED, 3 advertencias vacías en las instantáneas y advertencia presente en la lectura final. Reproducción aislada automática: 1 scenario failed por advertencia vacía. JavaScript público del sitio confirmado: `failedAttempts >= 4`. Una interacción adicional es compatible con el registro aprobado, sin poder atribuir su origen. No se fuerza una prueba a fallar si el esperado está presente.
